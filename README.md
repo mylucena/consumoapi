@@ -10,4 +10,8 @@ HTML: Campo de pesquisa e botão para buscar músicas.
 
 JavaScript: Realiza requisição à API do iTunes e exibe os resultados.
 
+<<<<<<< HEAD
 CSS: Estilo simples para apresentação dos resultados.
+=======
+CSS: Estilo simples para apresentação dos resultados.
+>>>>>>> 96a3f7659663e7e7d7263eac76892cfa1e67af04
