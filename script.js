@@ -11,6 +11,11 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 musicList.innerHTML = ''; 
 
+                if (data.results.length === 0) {
+                    musicList.innerHTML = '<p>Nenhuma música encontrada. Tente outro termo.</p>';
+                    return;
+                }
+
                 data.results.forEach(track => {
                     const musicDiv = document.createElement('div');
                     musicDiv.className = 'music';
@@ -19,8 +24,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         <img src="${track.artworkUrl100}" alt="${track.trackName}">
                         <div>
                             <h2>${track.trackName}</h2>
-                            <p><strong>Artista:</strong> ${track.artistName}</p>
-                            <p><strong>Álbum:</strong> ${track.collectionName}</p>
+                            <p><strong>🎤 Artista:</strong> ${track.artistName}</p>
+                            <p><strong>💿 Álbum:</strong> ${track.collectionName}</p>
+                            <audio controls>
+                                <source src="${track.previewUrl}" type="audio/mpeg">
+                                Seu navegador não suporta o player de áudio.
+                            </audio>
                         </div>
                     `;
 
@@ -29,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 console.error('Erro ao buscar músicas:', error);
-                musicList.innerHTML = '<p>Erro ao carregar músicas.</p>';
+                musicList.innerHTML = '<p>Erro ao carregar músicas. Tente novamente.</p>';
             });
     }
 
@@ -39,6 +48,12 @@ document.addEventListener('DOMContentLoaded', function () {
             fetchMusic(query);
         } else {
             alert('Por favor, digite o nome de um artista ou música.');
+        }
+    });
+
+    searchInput.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            searchButton.click();
         }
     });
 });
